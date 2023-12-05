@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include<stdlib.h>
-// CodeOperateur utilise cette convention connard
+//#define DEBUG
+// CodeOperateur utilise cette convention connard 
+// %x pour mettre en exa mais jsp
 
 int CodeOperateur(char* ch){
     if (strcmp(ch,"add") == 0) return 0;
@@ -20,7 +22,10 @@ int CodeOperateur(char* ch){
     if (strcmp(ch,"jzs") == 0) return 21;
     if (strcmp(ch,"jzc") == 0) return 22;
     if (strcmp(ch,"jcs") == 0) return 23;
-    if (strcmp(ch,"jcc") == 0) return 24;
+    if (strcmp(ch,"jcc") == 0) return 24boucle : lire le caractère suivant de la chaîne tant qu'il n'est pas nul
+  -> si le caractère est le premier lu ou si le précédent est un espace : réserver une chaîne remplie de zéros de (par exemple) 256 caractères pour recevoir le mot
+  -> si le caractère est différent d'un espace : copier le caractère à la suite du mot en cours
+fin de la boucle (caractère nul rencontré);
     if (strcmp(ch,"jns") == 0) return 25;
     if (strcmp(ch,"jnc") == 0) return 26;
     if (strcmp(ch,"in") == 0) return 27;
@@ -53,13 +58,36 @@ int RegistreDestination(char rd[]){
     return -1;
 }
 
-void 
 
-int main(){
+void Arith(int CodeOp,int Memoire[65536],int Registre[32],char ligne[]){
+	
+
+int main(int argc,char *argv[]){
     int Registre[32];
     int Memoire[65536];
     for (int i=0; i<32; i++){
         Registre[i]=i;
-    }
+    }; 
     printf("%d",RegistreDestination("r215"));
 }
+
+/*  Prototype pour lire mot par mot, il me reste a trouver quand arreter la boucle sans mettre d'espace à la fin 
+int main(int argc,char *argv[]){
+	char ligne[2][100];
+	char  i;
+	int mot=0,lettre=0;
+	FILE *f;
+	f=fopen(argv[1],"r");
+	fscanf(f,"%c",&i);
+	for(mot=0; mot<2;mot++){
+	lettre=0;
+	while(i!=' '){
+	ligne[mot][lettre]=i;
+	lettre++;
+	fscanf(f,"%c",&i);
+	};
+	fscanf(f,"%c",&i);
+	}
+	fclose(f);
+	printf("%s , %s", ligne[0],ligne[1]);
+}*/
